@@ -6,6 +6,7 @@
     <title>MC Server Status</title>
     <link rel="icon" href="Ojos.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
+                
 </head>
 <body>
             <?php
@@ -38,30 +39,30 @@
         <?php
             function parseMinecraftColors($text) {
                 $colors = [
-                    '0' => '#000000', // Black
-                    '1' => '#0000AA', // Dark Blue
-                    '2' => '#00AA00', // Dark Green
-                    '3' => '#00AAAA', // Dark Aqua
-                    '4' => '#AA0000', // Dark Red
-                    '5' => '#AA00AA', // Dark Purple
-                    '6' => '#FFAA00', // Gold
-                    '7' => '#AAAAAA', // Gray
-                    '8' => '#555555', // Dark Gray
-                    '9' => '#5555FF', // Blue
-                    'a' => '#00FF00', // Green
-                    'b' => '#55FFFF', // Aqua
-                    'c' => '#FF5555', // Red
-                    'd' => '#FF55FF', // Light Purple
-                    'e' => '#FFFF55', // Yellow
-                    'f' => '#FFFFFF', // White
-                    'r' => '#DCDCDC'  // Reset to default color
+                    '0' => '#000000',
+                    '1' => '#0000AA',
+                    '2' => '#00AA00',
+                    '3' => '#00AAAA',
+                    '4' => '#AA0000',
+                    '5' => '#AA00AA',
+                    '6' => '#FFAA00',
+                    '7' => '#AAAAAA',
+                    '8' => '#555555',
+                    '9' => '#5555FF',
+                    'a' => '#00FF00',
+                    'b' => '#55FFFF',
+                    'c' => '#FF5555',
+                    'd' => '#FF55FF',
+                    'e' => '#FFFF55',
+                    'f' => '#FFFFFF',
+                    'r' => '#DCDCDC' 
                 ];
 
-                // Convert ?<code> to <span> tags
+                //Convert ?<code> to <span> tags
                 $text = preg_replace_callback('/\?([0-9a-fr])/', function ($matches) use ($colors) {
                     $color = $matches[1];
                     if ($color == 'r') {
-                        return "<br>"; // Inserta un salto de línea cuando se detecta la letra "r"
+                        return "<br>"; //Inserta un salto de línea cuando se detecta la letra "r"
                     }
                     if (isset($colors[$color])) {
                         return '<span style="color:' . $colors[$color] . '">';
@@ -69,7 +70,6 @@
                     return $matches[0];
                 }, $text);
 
-                // Close all opened spans
                 $text .= str_repeat('</span>', substr_count($text, '<span'));
 
                 return $text;
@@ -112,7 +112,11 @@
                     echo '<h2>Jugadores conectados:</h2><ul>';
 
                     foreach ($players as $player) {
-                        echo '<li>' . htmlspecialchars($player) . '</li>';
+                        if ($player == 'Luipy'){
+                            echo '<li style="color:#0f0;">' . htmlspecialchars($player) . '</li>';
+                        }else{
+                            echo '<li>' . htmlspecialchars($player) . '</li>';
+                        }
                     }
                     echo '</ul>';
                 } else {
@@ -129,7 +133,9 @@
         </div>
         <div style='border-top: 1px solid #444;'>
         <p>Recuerda que puedes acceder al servidor utilizando la IP <b>mc.ldeluipy.es</b></p>
-        <p style="text-align:right;" ><a href="https://sites.google.com/view/luipyofficialweb/inicio" target="_blank">Más sobre Luipy</a></p>
+        <span style="text-align:right;" ><a href="https://sites.google.com/view/luipyofficialweb/inicio" target="_blank">Más sobre Luipy</a></span>
+        <br>
+        <span style="text-align:right;" ><a href="https://github.com/Luipy56/ProjectMC/blob/main/index.php" target="_blank">Código</a></span>
     </div>
 <script>
     function toggleDescription() {
